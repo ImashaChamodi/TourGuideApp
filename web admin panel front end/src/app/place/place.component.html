@@ -1,0 +1,51 @@
+<h2>Create a new place:</h2>
+<form (ngSubmit)="submitForm()" class="place-form">
+  <div>
+    <label for="place-name">Name:</label>
+    <input type="text" id="place-name" name="placeName" [(ngModel)]="placeName" required>
+  </div>
+  <div>
+    <label for="place-images">Images:</label>
+    <div class="image-upload-container">
+      <div *ngFor="let image of placeImages; let i = index" class="image-container">
+        <img [src]="image" alt="Image" class="uploaded-image">
+        <span class="remove-image" (click)="removeImage(i)">-</span>
+      </div>
+      <label class="upload-button" for="place-images" *ngIf="placeImages.length < 5">
+        <input type="file" id="place-images" name="placeImages" (change)="handleImageInput($event)" multiple>
+        +
+      </label>
+    </div>
+  </div>
+  <div>
+    <label for="place-type">Type:</label>
+    <select id="place-type" name="placeType" [(ngModel)]="placeType">
+      <option value="Historial significance">Historial significance</option>
+      <option value="Cultural value">Cultural value</option>
+      <option value="Political significance">Political significance</option>
+      <option value="Nature">Nature</option>
+      <option value="Natural or built beauty">Natural or built beauty</option>
+      <option value="Leisure">Leisure</option>
+      <option value="Amusement and fun">Amusement and fun</option>
+    </select>
+  </div>
+  <div>
+  <div>
+    <label for="attraction-details">Attraction Details:</label>
+    <textarea id="attraction-details" name="attractionDetails" [(ngModel)]="attractionDetails" required></textarea>
+  </div>
+  <div>
+    <label for="location">Location:</label>
+    <div id="map"></div>
+    <input type="hidden" id="location" name="location" [(ngModel)]="location">
+    <button type="button" (click)="markLocation()">Mark Location</button>
+  </div>
+  <div>
+    <label for="nearest-town">Nearest Town:</label>
+    <input type="text" id="nearest-town" name="nearestTown" [(ngModel)]="nearestTown">
+  </div>
+  <div>
+    <button type="submit">Submit</button>
+    <button type="button" (click)="clearFields()">Clear</button>
+  </div>
+
